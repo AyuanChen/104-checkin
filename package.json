@@ -1,0 +1,19 @@
+{
+  "name": "104-checkin",
+  "version": "1.0.0",
+  "description": "Auto checkin at 104",
+  "main": "checkin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AyuanChen/104-checkin.git"
+  },
+  "author": "sychen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AyuanChen/104-checkin/issues"
+  },
+  "homepage": "https://github.com/AyuanChen/104-checkin#readme"
+}
