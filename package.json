@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/AyuanChen/104-checkin/issues"
   },
-  "homepage": "https://github.com/AyuanChen/104-checkin#readme"
+  "homepage": "https://github.com/AyuanChen/104-checkin#readme",
+  "dependencies": {
+    "puppeteer": "^18.0.4"
+  }
 }
