@@ -5,11 +5,11 @@ const time = require('./modules/time.js');
 (async () => {
     await time.sleep(time.random_secs(config.random_sec));
     const browser = await puppeteer.launch({
-          headless: false,
+          headless: config.browser.background,
           //set false to enable brwoser, otherwise it will run in background
           defaultViewport: null,
-          executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-          userDataDir: './User_Data'
+          executablePath: config.browser.chrome_path,
+          userDataDir: config.browser.user_data
     })
     
     const page = await browser.newPage();

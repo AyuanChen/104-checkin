@@ -1,4 +1,9 @@
 {
+    "browser": {
+        "background": false,
+        "chrome_path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "user_data": "./User_Data"
+    },
     "urls": {
         "login": "https://pro.104.com.tw/user/signin?m=appcenter",
         "checkin":"https://pro.104.com.tw/psc2"
