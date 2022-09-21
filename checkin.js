@@ -5,21 +5,20 @@ const time = require('./modules/time.js');
 (async () => {
     await time.sleep(time.random_secs(config.random_sec));
     const browser = await puppeteer.launch({
-          headless: config.browser.background,
-          //set false to enable brwoser, otherwise it will run in background
-          defaultViewport: null,
-          executablePath: config.browser.chrome_path,
-          userDataDir: config.browser.user_data
+        headless: config.browser.background,
+        //set false to enable brwoser, otherwise it will run in background
+        defaultViewport: null,
+        executablePath: config.browser.chrome_path,
+        userDataDir: config.browser.user_data
     })
-    
+
     const page = await browser.newPage();
     await page.goto(config.urls.login);
 
-    try
-    {
+    try {
         console.log('Login page');
         //await page.waitForSelector('#app');
-        await page.waitForSelector('button[data-qa-id="loginButton"]', {timeout: config.timeout_ms});
+        await page.waitForSelector('button[data-qa-id="loginButton"]', { timeout: config.timeout_ms });
         await page.type('input[data-qa-id="loginUserName"]', config.user.username, {
             delay: 100
         })
@@ -28,30 +27,39 @@ const time = require('./modules/time.js');
         })
         await page.click('button[data-qa-id="loginButton"]')
     }
-    catch(error)
-    {
+    catch (error) {
         console.log('Already login?');
     }
 
-    await page.goto(config.urls.checkin);
-    await page.waitForSelector('#PSC2', {timeout: config.timeout_ms});
-    //wait for elements to appear on the page 
-    await page.waitForSelector('.col-xs-12' , {timeout: config.timeout_ms});
-    // capture all the items
-    let elements = await page.$$('.col-xs-12');
-    // loop trough items
-    for (let i = 0; i < elements.length; i++) 
-    {
-        let text = await page.evaluate(el => el.innerText, elements[i]);
-        if(text.indexOf("打卡") > -1 )
-        {
-            console.log("我要打卡囉")
-            await elements[i].click();
-            break;
+    try {
+        await page.goto(config.urls.checkin);
+        await page.waitForSelector('#PSC2', { timeout: config.timeout_ms });
+        //wait for elements to appear on the page 
+        await page.waitForSelector('.col-xs-12', { timeout: config.timeout_ms });
+        // capture all the items
+        let elements = await page.$$('.col-xs-12');
+        // loop trough items
+        for (let i = 0; i < elements.length; i++) {
+            let text = await page.evaluate(el => el.innerText, elements[i]);
+            if (text.indexOf("打卡") > -1) {
+                console.log("我要打卡囉")
+                await elements[i].click();
+                break;
+            }
+        }
+        time.sleep(1);
+        await page.screenshot({ path: './records/' + time.current_time() + 'checkin.png' });
+        await browser.close();
+    }
+    catch (error) {
+        await page.waitForSelector('.mb-8', { timeout: config.timeout_ms });
+        let elements = await page.$$('.mb-8');
+        for (let i = 0; i < elements.length; i++) {
+            let text = await page.evaluate(el => el.innerText, elements[i]);
+            if (text.indexOf("驗證碼") > -1) {
+                console.log("需要通過OTP驗證")
+                break;
+            }
         }
     }
-
-    await page.screenshot({path: './records/'+time.current_time()+'checkin.png'});  
-    await browser.close();
-    
 })();
