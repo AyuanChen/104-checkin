@@ -1,0 +1,12 @@
+{
+    "urls": {
+        "login": "https://pro.104.com.tw/user/signin?m=appcenter",
+        "checkin":"https://pro.104.com.tw/psc2"
+    },
+    "user": {
+        "username":"user",
+        "password":"pass"
+    },
+    "timeout_ms": 3000,
+    "random_sec": 600
+}
