@@ -8,7 +8,7 @@ const time = require('./modules/time.js');
         headless: config.browser.background,
         //set false to enable brwoser, otherwise it will run in background
         defaultViewport: null,
-        executablePath: config.browser.chrome_path,
+        //executablePath: config.browser.chrome_path,
         userDataDir: config.browser.user_data
     })
 
