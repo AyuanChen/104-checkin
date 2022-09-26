@@ -1,7 +1,7 @@
 {
     "browser": {
         "background": false,
-        "user_data": "./User_Data"
+        "user_data": "./userdata"
     },
     "urls": {
         "login": "https://pro.104.com.tw/user/signin?m=appcenter",
@@ -11,6 +11,6 @@
         "username": "user",
         "password": "pass"
     },
-    "timeout_ms": 8000,
-    "random_sec": 600
+    "timeout_ms": 300000,
+    "random_sec": 420
 }
