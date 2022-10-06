@@ -1,5 +1,5 @@
-const date = new Date();
 const current_time = function () {
+    const date = new Date();
     const current_time = date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2) + '_' + date.getHours() + '-' + date.getMinutes()
     return current_time
 }
