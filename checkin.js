@@ -10,7 +10,7 @@ const flog = require('./modules/log.js');
         await time.sleep(sleepTime);
     }
     else {
-        flog.normal('eager mode')
+        flog.normal('dry run')
     }
     const browser = await puppeteer.launch({
         headless: config.browser.background,
