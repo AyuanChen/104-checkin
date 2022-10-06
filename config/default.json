@@ -11,6 +11,8 @@
         "username": "user",
         "password": "pass"
     },
-    "timeout_ms": 300000,
+    "dry_run": false,
+    "otp_timeout_ms": 300000,
+    "timeout_ms": 15000,
     "random_sec": 420
 }
