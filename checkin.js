@@ -7,7 +7,7 @@ const flog = require('./modules/log.js');
     if (!config.dry_run) {
         var sleepTime = time.random_secs(config.random_sec);
         flog.normal('wait ' + sleepTime + ' seconds')
-        await time.sleep(sleepTime);
+        await time.sleep(sleepTime * 1000);
     }
     else {
         flog.normal('dry run')
@@ -58,6 +58,20 @@ const flog = require('./modules/log.js');
         await page.waitForSelector('#PRO-page-content', { timeout: config.otp_timeout_ms });
         await page.goto(config.urls.checkin);
         await page.waitForSelector('#PSC2', { timeout: config.timeout_ms });
+        try {
+            await page.waitForSelector('button[aria-label="關閉"]', { timeout: config.timeout_ms });
+            let elements = await page.$$('button[aria-label="關閉"]');
+            flog.normal('Find ' + elements.length + ' buttons, close them!');
+            await time.sleep(3000);
+            for (let i = 0; i < elements.length; i++) {
+                elements[i].click();
+            }
+            flog.normal('closed!');
+        }
+        catch (error) {
+            flog.normal('Keep going to check-in');
+        }
+
         //wait for elements to appear on the page 
         await page.waitForSelector('.col-xs-12', { timeout: config.timeout_ms });
         // capture all the items
@@ -73,7 +87,7 @@ const flog = require('./modules/log.js');
                 break;
             }
         }
-        time.sleep(1);
+        await time.sleep(1000)
         await page.screenshot({ path: './records/' + time.current_time() + 'checkin.png' });
         await browser.close();
     }
