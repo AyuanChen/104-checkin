@@ -67,6 +67,8 @@ const flog = require('./modules/log.js');
                 elements[i].click();
             }
             flog.normal('closed!');
+            await time.sleep(500);
+            await page.screenshot({ path: './records/' + time.current_time() + '_PSC2.png' });
         }
         catch (error) {
             flog.normal('Keep going to check-in');
@@ -87,8 +89,8 @@ const flog = require('./modules/log.js');
                 break;
             }
         }
-        await time.sleep(1000)
-        await page.screenshot({ path: './records/' + time.current_time() + 'checkin.png' });
+        await time.sleep(500)
+        await page.screenshot({ path: './records/' + time.current_time() + '_checkin.png' });
         await browser.close();
     }
     catch (error) {
