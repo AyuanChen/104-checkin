@@ -58,17 +58,19 @@ const flog = require('./modules/log.js');
         await page.waitForSelector('#PRO-page-content', { timeout: config.otp_timeout_ms });
         await page.goto(config.urls.checkin);
         await page.waitForSelector('#PSC2', { timeout: config.timeout_ms });
+        await time.sleep(500);
+        await page.screenshot({ path: './records/' + time.current_time() + '_PSC2.png' });
         try {
             await page.waitForSelector('button[aria-label="關閉"]', { timeout: config.timeout_ms });
             let elements = await page.$$('button[aria-label="關閉"]');
             flog.normal('Find ' + elements.length + ' buttons, close them!');
-            await time.sleep(3000);
+            await time.sleep(4500);
             for (let i = 0; i < elements.length; i++) {
                 elements[i].click();
             }
             flog.normal('closed!');
             await time.sleep(500);
-            await page.screenshot({ path: './records/' + time.current_time() + '_PSC2.png' });
+            await page.screenshot({ path: './records/' + time.current_time() + '_PSC2e.png' });
         }
         catch (error) {
             flog.normal('Keep going to check-in');
