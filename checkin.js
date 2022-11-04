@@ -96,7 +96,8 @@ const flog = require('./modules/log.js');
         await browser.close();
     }
     catch (error) {
-        flog.normal('Login failed!');
+        flog.normal('Failed to check-in');
+        await page.screenshot({ path: './records/' + time.current_time() + '_error.png' });
     }
 
 })();
